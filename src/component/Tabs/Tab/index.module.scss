@@ -1,0 +1,17 @@
+.tab {
+  $tab: &;
+
+  &_item {
+    display: inline-block;
+  }
+  
+  &_link {
+    display: block;
+    padding: 16px 12px;
+    outline: none;
+    
+    &[aria-selected='true'] {
+      color: $blue;
+    }
+  }
+}

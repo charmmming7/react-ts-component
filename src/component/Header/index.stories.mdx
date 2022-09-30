@@ -1,0 +1,131 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { SideMenu } from '../SideMenu';
+import { HeaderNavigation } from '../HeaderNavigation';
+import {HeaderProps, Header} from './index';
+import SampleHeader from './view';
+
+export const Template = (args) => <SampleHeader {...args} />;
+export const SideMenuTemplate = (args) => <SideMenu {...args} />;
+
+export const HeaderArgTypes = {
+  openType: {
+    description: '헤더네비게이션 하위 메뉴 오픈 방식',
+    control: {
+      type: 'select'
+    },
+    options: ['all', 'onlySelected'],
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'string',
+        detail: 'all[default]: 전체오픈\nonlySelected: 선택된 메뉴만 오픈'
+      }
+    }
+  },
+    position: {
+    description: '사이드메뉴 레이어 오픈 방향',
+    control: {
+      type: 'select'
+    },
+    options: ['left', 'right'],
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'string',
+        detail: 'left[default]: 왼쪽에서 오픈\nright: 오른쪽에서 오픈'
+      }
+    }
+  }
+};
+
+export const menuList = [
+  { name: '회사소개', to: 'https://hivelab.co.kr/ko/about', type: 'external' },
+  { name: '서비스', to: '#/' },
+  {
+    name: 'PR',
+    to: '#/',
+    isActive: true,
+    subMenu: [
+      { name: '보도자료', to: '#/', isActive: true },
+      { name: '미디어', to: '#/' },
+      { name: '공지사항', to: '#/' },
+      { name: '자주 묻는 질문', to: '#/' }
+    ]
+  },
+  {
+    name: 'IR',
+    to: '#/',
+    subMenu: [
+      { name: '공시 정보', to: '#/' },
+      { name: '주가 정보', to: '#/' },
+      { name: '재무재표', to: '#/' },
+      { name: 'IR 자료실', to: '#/' }
+    ]
+  }
+];
+
+<Meta
+  title="Component/Header"
+  component={SampleHeader}
+  subcomponents={SideMenu}
+  argTypes={{ ...HeaderArgTypes }}
+/>
+
+# Header
+
+PC, Mobile에서 사용 가능한 헤더 컴포넌트입니다. 로고, 헤더 네비게이션 컴포넌트, 사이드메뉴 컴포넌트를 포함할 수 있습니다. <br />
+접속 디바이스가 PC 일 경우 로고, 헤더 네비게이션 컴포넌트를 노출하고, Mobile일 경우 사이드메뉴 컴포넌트를 노출합니다.
+
+## Props
+
+### Header
+
+<ArgsTable of={Header} />
+
+### HeaderNavigation
+
+<ArgsTable of={HeaderNavigation} />
+
+### SideMenu
+
+<ArgsTable of={SideMenu} />
+
+## Variations
+
+### PC
+
+<Canvas>
+  <Story
+    name="PC"
+    inline={true}
+    height="400px"
+    args={{ openType: 'all', menuList: menuList, classNamePc: 'header_pc' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<Header
+  openType={openType}
+  menuList={menuList}
+  classNamePc={classNamePc}/>
+```
+
+### Mobile
+
+<Canvas>
+  <Story
+    name="Mobile"
+    inline={true}
+    height="400px"
+    args={{ position: 'left', menuList: menuList, classNameMo: 'header_mo' }}>
+    {SideMenuTemplate.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<Header
+  position={position}
+  menuList={menuList}
+  classNameMo={classNameMo} />
+```

@@ -1,0 +1,127 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { SideMenuItem, SideMenuSubNav, SideMenuNav, SideMenu } from './index';
+
+export const Template = (args) =>
+  <div style={{overflowY: 'auto', position:'relative', height:'400px'}}>
+    <SideMenu {...args} />
+    <div style={{height:'130vh', backgroundColor: 'aliceblue'}}>컨텐츠</div>
+  </div>;
+
+export const SideMenuNavArgTypes = {
+  position: {
+    description: '사이드 메뉴 레이어 오픈 방향',
+    control: {
+      type: 'select'
+    },
+    options: ['left', 'right'],
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'string',
+        detail: 'left[default]: 왼쪽에서 오픈\nright: 오른쪽에서 오픈'
+      }
+    }
+  }
+};
+
+export const menuList = [
+  { name: '회사소개', to: 'https://hivelab.co.kr/ko/about', type: 'external' },
+  { name: '서비스', to: '#/' },
+  {
+    name: 'PR',
+    to: '#/',
+    isActive: true,
+    subMenu: [
+      { name: '보도자료', to: '#/'},
+      { name: '미디어', to: '#/', isActive: true },
+      { name: '공지사항', to: '#/' },
+      { name: '자주 묻는 질문', to: '#/' }
+    ]
+  },
+  {
+    name: 'IR',
+    to: '#/',
+    subMenu: [
+      { name: '공시 정보', to: '#/' },
+      { name: '주가 정보', to: '#/' },
+      { name: '재무재표', to: '#/' },
+      { name: 'IR 자료실', to: '#/' }
+    ]
+  }
+];
+
+<Meta
+  title="Component/SideMenu"
+  component={SideMenu}
+  argTypes={{ ...SideMenuNavArgTypes }}
+/>
+
+# SideMenu
+
+모바일에서 사용 가능한 사이드 메뉴 컴포넌트 입니다.
+
+## Props
+
+### SideMenu
+
+<ArgsTable of={SideMenu} />
+
+### SideMenu.SideMenuNav
+
+<ArgsTable of={SideMenuNav} />
+
+### SideMenu.SideMenuItem
+
+<ArgsTable of={SideMenuItem} />
+
+### SideMenu.SideMenuSubNav
+
+<ArgsTable of={SideMenuSubNav} />
+
+
+## Variations
+
+### 왼쪽에서 오픈 (Default)
+
+- 사이드메뉴 레이어가 왼쪽에서 열리는 타입입니다.
+
+<Canvas>
+  <Story
+    name="Left"
+    inline={true}
+    height="400px"
+    args={{ position: 'left', menuList: menuList }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<SideMenu position="left" menuList={menuList} />
+```
+
+### 오른쪽에서 오픈
+
+- 사이드메뉴 레이어가 오른쪽에서 열리는 타입입니다.
+
+<Canvas>
+  <Story
+    name="Right"
+    inline={true}
+    height="400px"
+    args={{ position: 'right', menuList: menuList }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<SideMenu position="right" menuList={menuList} />
+```
+
+## 참고 사항
+
+- 사이드 메뉴는 상단에 고정되어 있습니다.
+
+- 한 개의 서브메뉴만 열 수 있습니다. 다른 메뉴 클릭 시, 열려있던 메뉴는 닫히게 됩니다.
+

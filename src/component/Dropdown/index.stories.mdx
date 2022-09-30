@@ -1,0 +1,140 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Dropdown, DropdownList } from './index';
+
+export const Template = (args) => <Dropdown {...args} />;
+
+export const ItemOptions = ['옵션 1','옵션 2','옵션 3','옵션 4','옵션 5'];
+export const ItemLength = ItemOptions.length - 1;
+export let ItemArr = [];
+ItemOptions.forEach((e, i) => {
+  ItemArr.push(i);
+});
+
+export const DropdownArgTypes = {
+  initialIndex: {
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'number',
+        detail: '시작 인덱스: -1'
+      }
+    },
+    description: '선택된 탭 인덱스',
+    options: ItemArr,
+    control: {
+      type: 'select',
+    },
+  },
+  isDisabled: {
+    table: {
+      category: 'style',
+      type: {
+        summary: 'boolean',
+      }
+    },
+    description: '비활성 상태 여부',
+    defaultValue: false,
+    control: {
+      type: 'boolean'
+    }
+  },
+  placeholder: {
+    table: {
+      category: 'Text',
+      type: {
+        summary: 'string'
+      }
+    },
+    description: '드롭다운 선택 전 기본 텍스트',
+    control: {
+      type: 'text'
+    }
+  },
+  className: {
+    table: {
+      category: 'Text',
+      type: {
+        summary: 'string'
+      }
+    },
+    description: '커스텀 클래스명',
+    control: {
+      type: 'text'
+    }
+  }
+};
+
+<Meta
+  title="Component/Dropdown"
+  component={Dropdown}
+  argTypes={{ ...DropdownArgTypes }}
+/>
+
+# Dropdown
+
+선택 시 메뉴 리스트를 펼쳐볼 수 있는 드롭다운 메뉴 컴포넌트입니다.
+
+## Props
+
+### Dropdown
+
+<ArgsTable of={Dropdown} />
+
+### DropdownList
+
+<ArgsTable of={DropdownList} />
+
+## Variations
+
+### Default
+
+<Canvas>
+  <Story
+    name="Default"
+    inline="true"
+    height="200px"
+    args={{ ItemOptions: ItemOptions }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<Dropdown ItemOptions={ItemOptions}/>
+```
+
+### isDisabled
+
+- 비활성 상태의 드롭다운 입니다.
+
+<Canvas>
+  <Story
+    name="isDisabled"
+    inline="true"
+    height="200px"
+    args={{ ItemOptions: ItemOptions, placeholder: '비활성 메뉴입니다', isDisabled: true }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<Dropdown ItemOptions={ItemOptions} placeholder="비활성 메뉴입니다" isDisabled={true} />
+```
+
+### Placeholder
+
+<Canvas>
+  <Story
+    name="Placeholder"
+    inline="true"
+    height="200px"
+    args={{ ItemOptions: ItemOptions, placeholder: "커스텀 플레이스 홀더 지정 가능" }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<Dropdown ItemOptions={ItemOptions} placeholder="커스텀 플레이스 홀더 지정 가능" />
+```

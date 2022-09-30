@@ -1,0 +1,39 @@
+legend,
+caption span,
+.blind {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  font-size: medium;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.scroll {
+  position: relative;
+  overflow: auto;
+  overflow: overlay; // webkit style
+  scrollbar-color: rgba(0, 0, 0, .24) rgba(0, 0, 0, .12); // mozilla style
+  scrollbar-width: thin; // mozilla style
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, .12);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, .24);
+  }
+}

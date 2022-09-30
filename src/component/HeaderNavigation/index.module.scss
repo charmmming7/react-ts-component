@@ -1,0 +1,50 @@
+.header {
+  $paddingLeft: 60px;
+
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $header-menu-z-index;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 84px;
+  padding: 0 $paddingLeft;
+  background-color: rgba($white, .9);
+  box-shadow: 0 0 4px 0 rgba($black, .15%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 84px;
+    right: 0;
+    left: 0;
+    z-index: calc($header-menu-z-index + 1);
+    border-bottom: 1px solid $silver;
+  }
+
+  // logo
+  [class^='logo'] {
+    position: absolute;
+    top: 24px;
+    left: $paddingLeft;
+  }
+}
+
+.nav {
+  overflow: hidden;
+  height: 84px;
+  padding-top: 20px;
+  transition: height .4s ease-in-out;
+
+  &:global(.only_selected) {
+    overflow: visible;
+  }
+
+  &_list {
+    display: flex;
+    flex: none;
+    align-items: flex-start;
+  }
+}

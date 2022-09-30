@@ -1,0 +1,166 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { HeaderNavigation, NavItem, SubNav } from './index';
+
+export const Template = (args) => <HeaderNavigation {...args} />;
+
+export const HeaderNavArgTypes = {
+  openType: {
+    description: '하위 메뉴 오픈 방식',
+    control: {
+      type: 'select'
+    },
+    options: ['all', 'onlySelected'],
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'string',
+        detail: 'all[default]: 전체오픈\nonlySelected: 선택된 메뉴만 오픈'
+      }
+    }
+  }
+};
+
+export const menuList = [
+  { name: '회사소개', to: 'https://hivelab.co.kr/ko/about', type: 'external' },
+  { name: '서비스', to: '#/' },
+  {
+    name: 'PR',
+    to: '#/',
+    isActive: true,
+    subMenu: [
+      { name: '보도자료', to: '#/', isActive: true },
+      { name: '미디어', to: '#/' },
+      { name: '공지사항', to: '#/' },
+      { name: '자주 묻는 질문', to: '#/' }
+    ]
+  },
+  {
+    name: 'IR',
+    to: '#/',
+    subMenu: [
+      { name: '공시 정보', to: '#/' },
+      { name: '주가 정보', to: '#/' },
+      { name: '재무재표', to: '#/' },
+      { name: 'IR 자료실', to: '#/' }
+    ]
+  }
+];
+
+<Meta
+  title="Component/HeaderNavigation"
+  component={HeaderNavigation}
+  argTypes={{ ...HeaderNavArgTypes }}
+/>
+
+# HeaderNavigation
+
+PC에서 사용 가능한 헤더 네비게이션 컴포넌트 입니다. 헤더 컴포넌트에 추가하여 사용 가능합니다.
+
+
+## Props
+
+### HeaderNavigation
+
+<ArgsTable of={HeaderNavigation} />
+
+### HeaderNavigation.NavItem
+
+<ArgsTable of={NavItem} />
+
+### HeaderNavigation.SubNav
+
+<ArgsTable of={SubNav} />
+
+
+## Variations
+
+### All (Default)
+
+- 전체 서브메뉴가 한번에 노출되는 타입 입니다.
+
+<Canvas>
+  <Story
+    name="All"
+    inline={true}
+    height="400px"
+    args={{ openType: 'all', menuList: menuList }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<HeaderNavigation openType="all" menuList={menuList} />
+```
+
+### OnlySelected
+
+- 선택된 1dpeth의 서브 메뉴만 노출되는 타입 입니다.
+
+<Canvas>
+  <Story
+    name="OnlySelected"
+    inline={true}
+    height="400px"
+    args={{ openType: 'onlySelected', menuList: menuList }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+<HeaderNavigation openType="onlySelected" menuList={menuList} />
+```
+
+## 참고 사항
+
+- 메뉴에 마우스오버를 할 경우, `is_active` 클래스를 추가하여 active 효과를 줍니다. (1,2뎁스 메뉴 동일)
+
+- 현재 페이지에 해당하는 메뉴도 `is_active` 클래스로 active 효과를 줍니다. `NavItem` 컴포넌트에서 `is_active` prop으로 현재 메뉴 선택 여부를 제어할 수 있습니다. (1,2뎁스 메뉴 동일)
+
+## Code Example
+
+### HTML
+
+```html
+<nav class="nav" role="navigation">
+  <ul>
+    <li class="nav_item"><a href="#/" class="nav_link">회사소개</a></li>
+    <li class="nav_item"><a href="#/" class="nav_link">서비스</a></li>
+    <li class="nav_item">
+      <a href="#/" class="nav_link">PR</a>
+      <ul class="sub_nav_list">
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">보도자료</a>
+        </li>
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">미디어</a>
+        </li>
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">공지사항</a>
+        </li>
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">자주 묻는 질문</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav_item">
+      <a href="#/" class="nav_link">IR</a>
+      <ul class="sub_nav_list">
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">공시 정보</a>
+        </li>
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">주가 정보</a>
+        </li>
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">재무재표</a>
+        </li>
+        <li class="sub_nav_item">
+          <a href="#/" class="sub_nav_link">IR 자료실</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+```

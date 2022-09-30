@@ -1,0 +1,40 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: $content-width;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex: 1 1 auto;
+  width: $content-width;
+  margin: 0 auto;
+  padding: 0 20px 107px;
+}
+
+.content {
+  flex: 1;
+  padding: 36px 0 0 64px;
+
+  > .section_title .title_lv2 {
+    @include blind;
+  }
+}
+
+.footer {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 25px 20px;
+  background-color: #222426;
+  color: $gray6;
+
+  &_inner {
+    max-width: $content-width - 40;
+    margin: 0 auto;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}

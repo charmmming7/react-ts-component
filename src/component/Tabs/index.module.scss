@@ -1,0 +1,28 @@
+.tab {
+  position: relative;
+
+  &_list {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background-color: $silver;
+    }
+  }
+
+  &_bar {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: $blue;
+    pointer-events: none;
+    transition: all .3s;
+    transform: translateX(0);
+  }
+}

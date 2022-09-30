@@ -1,0 +1,9 @@
+.logo {
+  display: inline-block;
+
+  svg,
+  img {
+    width: var(--width);
+    height: var(--height);
+  }
+}

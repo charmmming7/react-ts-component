@@ -1,0 +1,140 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  ArgsTable,
+  PRIMARY_STORY
+} from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { Tabs, Tab, TabPanel } from './index';
+import SampleTab from './view';
+
+export const Template = (args) => <SampleTab {...args} />;
+
+export const TabsArgTypes = {
+  initialIndex: {
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'number',
+        detail: '시작 인덱스: 0'
+      }
+    },
+    description: '선택된 탭 인덱스',
+    control: {
+      type: 'select',
+      options: [0, 1, 2]
+    }
+  },
+  tabsId: {
+    table: {
+      category: 'Text',
+      type: {
+        summary: 'string'
+      }
+    },
+    description: '탭 id',
+    control: {
+      type: 'text'
+    }
+  },
+  tabLabelList: {
+    table: {
+      category: 'Text'
+    },
+    description: '탭 레이블 리스트'
+  }
+};
+
+export const tabLabelList = [ 'Tab 1', 'Taaaaab 2', 'Tab 3'];
+
+<Meta
+  title="Component/Tabs"
+  component={SampleTab}
+  argTypes={{ ...TabsArgTypes }}
+/>
+
+# Tabs
+
+선택한 탭에 따라 탭 컨텐츠가 바뀌는 탭 컴포넌트 입니다.
+
+## Props
+
+### Tabs
+<ArgsTable of={Tabs} />
+
+### Tabs.Tab
+<ArgsTable of={Tab} />
+
+### Tabs.TabPanel
+<ArgsTable of={TabPanel} />
+
+## Variations
+
+### Default
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{ initialIndex: 0, tabsId: 'defaultTab', tabLabelList: tabLabelList }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Code Example
+
+### TSX
+
+```tsx
+<Tabs tabsId={tabsId} initialIndex={initialIndex} tabLabelList={tabLabelList}>
+  <TabPanel tabsId={tabsId} index={0}>
+    Tab Panel 1
+  </TabPanel>
+
+  <TabPanel tabsId={tabsId} index={1}>
+    Tab Panel 2
+  </TabPanel>
+
+  <TabPanel tabsId={tabsId} index={2}>
+    Tab Panel 3
+  </TabPanel>
+</Tabs>
+```
+
+### HTML
+
+```html
+<div className="tab">
+  <ul className="tab_list" role="tablist">
+    <li className="tab_item is_selected" role="presentation">
+      <button
+        className="tab_link"
+        role="tab"
+        id="tab-0"
+        aria-controls="pannel-0"
+        aria-selected="true"
+      >
+        Tab 1
+      </button>
+    </li>
+  </ul>
+</div>
+<div
+  className="tab_panel"
+  role="tabpanel"
+  id="pannel-0"
+  aria-labelledby="tab-0"
+>
+  Tab Panel 1
+</div>
+```
+
+## 참고
+
+- `Tabs` 컴포넌트 내부에 `Tab`, `TabPanel` 컴포넌트가 존재함
+- `tabLabelList` 배열 데이터로 탭 버튼을 생성함
+- `TabPanel` 에 HTML 코드 입력 가능
+- 한 페이지에 여러 개의 탭이 존재할 수 있기 때문에 탭의 고유 id인 `tabsId`가 필요함
+- 탭 인덱스 초기값은 `initialIndex` 속성으로 제어함 (기본값: 0)
+- 탭 버튼과 탭 패널 간의 연결성을 부여하기 위해 `.tab_link`의 `aria-controls`속성값과 `.tab_panel`의 `tabId` 속성값은 일치해야 하며, `.tab_link`의 `tabId` 속성값과 `.tab_panel`의 `aria-labelledby` 속성값과 일치해야 함

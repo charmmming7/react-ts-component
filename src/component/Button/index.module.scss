@@ -1,0 +1,42 @@
+.btn {
+  display: inline-block;
+  height: 32px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  background-color: $darkGray;
+  color: $white;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  
+  &:hover {
+    box-shadow: 0 0 2px 1px rgba($black, .3%);
+    animation-name: inherit;
+  }
+
+  &.is_primary {
+    background-color: $blue;
+  }
+
+  &.is_block {
+    display: block;
+    width: 100%;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    margin-top: 3px;
+    vertical-align: top;
+
+    +.btn_label {
+      margin-left: 6px;
+    }
+  }
+
+  &[disabled] {
+    opacity: .5;
+    pointer-events: none;
+  }
+}

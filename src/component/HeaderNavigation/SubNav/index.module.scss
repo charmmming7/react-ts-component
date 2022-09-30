@@ -1,0 +1,25 @@
+.sub_nav_list {
+  padding: 16px 0 26px;
+
+  &:global(.only_selected) {
+    $paddingLeft: 22px;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    overflow: hidden;
+    width: 130px;
+    height: 0;
+    padding: 0 #{$paddingLeft};
+    background-color: rgba($white, .9);
+    text-align: center;
+    transition: height .4s ease-in-out;
+    transform: translateX(calc(-50% + #{$paddingLeft}/2));
+
+    &:global(.is_active) {
+      height: auto;
+      padding-top: 10px;
+      padding-bottom: 26px;
+      border: 1px solid $silver;
+    }
+  }
+}

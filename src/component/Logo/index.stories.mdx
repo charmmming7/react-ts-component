@@ -1,0 +1,122 @@
+import { Meta, Story, Canvas, ArgsTable, PRIMARY_STORY} from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import Logo from './index';
+import IconReactLogoSvg from 'asset/images/svg/logo_react.svg';
+import IconReactLogoPng from 'asset/images/png/logo_react.png';
+
+export const TemplateSvg = (args) => (
+  <Logo {...args}>
+    <IconReactLogoSvg/>
+  </Logo>
+);
+
+export const TemplatePng = (args) => (
+  <Logo {...args}>
+    <img src={IconReactLogoPng} alt=""/>
+  </Logo>
+);
+
+export const LogoArgTypes = {
+  to: {
+    table: {
+      category: 'text',
+    },
+    defaultValue: '/'
+  },
+  text: {
+    table: {
+      category: 'text',
+    },
+    defaultValue: '로고'
+  },
+  logoWidth: {
+    table: {
+      category: 'style',
+    },
+    defaultValue: 36
+  },
+  logoHeight: {
+    table: {
+      category: 'style',
+    },
+    defaultValue: 36
+  },
+  children: {
+    table: {
+      disable: true
+    }
+  }
+};
+
+
+<Meta
+  title="Component/Logo"
+  component={Logo}
+  argTypes={{...LogoArgTypes}}
+/>
+
+# Logo
+
+링크를 포함하고 있는 로고 컴포넌트입니다.<br/>
+svg, png 등의 이미지 파일을 모듈로 추가하여 사용합니다.
+
+## Props
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Variations
+
+### SVG 사용
+
+<Canvas>
+  <Story
+    name="SVG"
+  >
+    {TemplateSvg.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+import IconReactLogoSvg from 'asset/images/svg/logo_react.svg';
+
+<Logo to="/" text="로고" logoWidth="36" logoHeight="36">
+  <IconReactLogoSvg/>
+</Logo>
+
+```
+
+
+### PNG 사용
+
+<Canvas>
+  <Story
+    name="PNG"
+  >
+    {TemplatePng.bind({})}
+  </Story>
+</Canvas>
+
+컴포넌트 내에서 생성되는 `<a>` 태그에 `aria-label`이 제공되므로, `<img>` 의 `alt` 속성은 빈 값이어도 무방합니다.
+
+```tsx
+import IconReactLogoPng from 'asset/images/png/logo_react.png';
+
+<Logo to="/" text="로고" logoWidth="36" logoHeight="36">
+  <img src={IconReactLogoPng} alt=""/>
+</Logo>
+
+```
+
+## 참고 사항
+
+### HTML
+
+`logoWidth`와 `logoHeight`은 CSS 변수로 선언되어 svg의 `width`, `height`를 지정하는데 활용됩니다.
+
+```html
+<a href="/" aria-label="로고" class="logo_xxx" style="--width:36px; --height:36px;">
+  <svg>
+  ...
+  </svg>
+</a>
+```

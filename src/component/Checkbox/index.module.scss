@@ -1,0 +1,56 @@
+.checkbox {
+  $checkbox: &;
+  display: inline-block;
+  position: relative;
+
+  &_input {
+    position: absolute;
+
+    &:checked+#{$checkbox}_label {
+      &::before {
+        background-color: $blue;
+      }
+    }
+
+    &[disabled] {
+      +#{$checkbox}_label {
+        opacity: .4;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &_label {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    vertical-align: top;
+    cursor: pointer;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      content: '';
+      width: 18px;
+      height: 18px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background-color: rgba($darkGray, .3);
+      transition: all .2s;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 4px;
+      width: 10px;
+      height: 6px;
+      border: 2px solid $white;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      transform: rotate(-45deg);
+    }
+  }
+}

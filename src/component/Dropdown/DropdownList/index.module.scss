@@ -1,0 +1,29 @@
+.dropdown {
+  &_box {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background-color: $white;
+
+    &.is_open {
+      border: 1px solid $black;
+      border-top-width: 0;
+    }
+  }
+
+  &_item {
+    position: relative;
+    // button 공통 스타일
+    width: 100%;
+    padding: 8px 14px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+
+    &:hover,
+    &[aria-selected='true'] {
+      background-color: lighten($color: $gradBlue1, $amount: 31%);
+    }
+  }
+}

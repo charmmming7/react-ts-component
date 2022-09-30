@@ -1,0 +1,217 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  ArgsTable,
+  PRIMARY_STORY
+} from '@storybook/addon-docs/blocks';
+import { AccordionList, AccordionHeader, AccordionPanel } from './index';
+import SampleAccordion from './view';
+
+export const Template = (args) => <SampleAccordion {...args} />;
+
+export const AccordionArgTypes = {
+  initialIndex: {
+    table: {
+      category: 'layout',
+      type: {
+        summary: 'number',
+        detail: '시작 인덱스: 0\n모두 닫기: -1'
+      }
+    },
+    description: '선택된 탭 인덱스',
+    control: {
+      type: 'select'
+    },
+    options: [0, 1, 2]
+  },
+  accordionId: {
+    table: {
+      category: 'Text',
+      type: {
+        summary: 'string'
+      }
+    },
+    description: '아코디언 id',
+    control: {
+      type: 'text'
+    }
+  },
+  isAllExpanded: {
+    table: {
+      category: 'Layout',
+      type: {
+        summary: 'boolean'
+      }
+    },
+    description: '전체 아코디언 확장 여부',
+    control: {
+      type: 'boolean'
+    }
+  }
+};
+
+export const isOpen = [true, false, false];
+
+<Meta
+  title="Component/AccordionList"
+  component={SampleAccordion}
+  argTypes={{ ...AccordionArgTypes }}
+/>
+
+# Accordion List
+
+선택한 패널이 확장되는 컴포넌트입니다.
+
+## Props
+
+### Accordion
+
+<ArgsTable of={AccordionList} />
+
+### Accordion.AccordionHeader
+
+<ArgsTable of={AccordionHeader} />
+
+### Accordion.AccordionPanel
+
+<ArgsTable of={AccordionPanel} />
+
+## Variations
+
+### Default
+
+- 아코디언은 모두 닫혀있도록 설정되어 있습니다.
+- `initialIndex: -1`이 기본 값이며, 모두 닫힌 상태가 됩니다.
+
+<Canvas>
+  <Story name="Default" args={{ accordionId: 'default' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### 일부 열린 아코디언
+
+- `initialIndex`로 특정 인덱스의 아코디언이 열려있게 설정할 수 있습니다. (한 개만 가능)
+
+<Canvas>
+  <Story
+    name="일부 열린 아코디언"
+    args={{ accordionId: 'default2', initialIndex: 0 }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### 모두 열려있는 아코디언
+
+- `isAllExpanded:true[false]`로 아코디언을 모두 열리게 설정할 수 있습니다.
+
+<Canvas>
+  <Story
+    name="모두 열려있는 아코디언"
+    args={{ accordionId: 'default3', isAllExpanded: true }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Code Example
+
+### TSX
+
+```tsx
+<AccordionList accordionId={accordionId}>
+  <AccordionPanel accordionIndex={0} headerLabel="Accordion 1">
+    <p style={{ padding: '20px' }}>Accordion Panel 1</p>
+  </AccordionPanel>
+  <AccordionPanel accordionIndex={1} headerLabel="Accordion 2">
+    <p style={{ padding: '20px' }}>Accordion Panel 2</p>
+  </AccordionPanel>
+  <AccordionPanel accordionIndex={2} headerLabel="Accordion 3">
+    <p style={{ padding: '20px' }}>Accordion Panel 3</p>
+  </AccordionPanel>
+</AccordionList>
+```
+
+### HTML
+
+```html
+<div class="accordion" id="default">
+  <button
+    type="button"
+    class="accordion_header"
+    tabindex="0"
+    aria-expanded="true"
+    aria-controls="default-panel-0"
+  >
+    <svg
+      viewBox="64 64 896 896"
+      width="12"
+      height="12"
+      fill="currentColor"
+      aria-hidden="true"
+      class="accordion_icon"
+      role="img"
+    >
+      <path
+        d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+      ></path>
+    </svg>
+    Accordion 1
+  </button>
+  <div class="accordion_panel" id="default-panel-0">
+    <p style="padding: 20px;">Accordion Panel 1</p>
+  </div>
+  <button
+    type="button"
+    class="accordion_header"
+    tabindex="0"
+    aria-expanded="false"
+    aria-controls="default-panel-1"
+  >
+    <svg
+      viewBox="64 64 896 896"
+      width="12"
+      height="12"
+      fill="currentColor"
+      aria-hidden="true"
+      class="accordion_icon"
+      role="img"
+    >
+      <path
+        d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+      ></path>
+    </svg>
+    Accordion 2
+  </button>
+  <div class="accordion_panel" id="default-panel-1">
+    <p style="padding: 20px;">Accordion Panel 2</p>
+  </div>
+  <button
+    type="button"
+    class="accordion_header"
+    tabindex="0"
+    aria-expanded="false"
+    aria-controls="default-panel-2"
+  >
+    <svg
+      viewBox="64 64 896 896"
+      width="12"
+      height="12"
+      fill="currentColor"
+      aria-hidden="true"
+      class="accordion_icon"
+      role="img"
+    >
+      <path
+        d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+      ></path>
+    </svg>
+    Accordion 3
+  </button>
+  <div class="accordion_panel" id="default-panel-2">
+    <p style="padding: 20px;">Accordion Panel 3</p>
+  </div>
+</div>
+```

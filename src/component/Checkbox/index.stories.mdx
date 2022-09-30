@@ -1,0 +1,159 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  ArgsTable,
+  PRIMARY_STORY
+} from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import Checkbox from './index';
+
+export const Template = (args) => <Checkbox {...args} />;
+
+export const TemplateExternalLabel = (args) => {
+  return (
+    <>
+      <Checkbox {...args} />
+      <span
+        id="checkbox-external-label"
+        style={{ lineHeight: '18px', verticalAlign: 'top' }}
+      >
+        external label
+      </span>
+    </>
+  );
+};
+
+export const CheckboxArgTypes = {
+  label: {
+    table: {
+      category: 'text'
+    },
+    defaultValue: 'checkbox',
+    control: {
+      type: 'text'
+    }
+  },
+  hasLabel: {
+    table: {
+      category: 'style',
+      type: {
+        summary: 'boolean',
+        detail: `true: 내부 레이블 사용\nfalse: 외부 레이블 연결`
+      }
+    },
+    control: {
+      type: 'boolean'
+    }
+  },
+  isDisabled: {
+    table: {
+      category: 'style'
+    },
+    control: {
+      type: 'boolean'
+    }
+  },
+  id: {
+    table: {
+      category: 'etc'
+    }
+  },
+  name: {
+    table: {
+      category: 'etc'
+    }
+  },
+  externalLabelId: {
+    table: {
+      category: 'etc',
+      type: {
+        detail: `hasLabel:true 일 경우 사용`
+      }
+    },
+    defaultValue: 'checkbox-custom-label',
+    control: {
+      type: 'text'
+    }
+  }
+};
+
+<Meta
+  title="Component/Checkbox"
+  component={Checkbox}
+  argTypes={CheckboxArgTypes}
+  parameters={{ actions: { disable: true } }}
+/>
+
+# Checkbox
+
+## Props
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Variations
+
+### Default
+
+- 컴포넌트에 체크박스와 라벨이 함께 존재하는 기본 유형
+- `<input>`의 `id` 값과 `<label>`의 `for` 값이 반드시 일치해야 함
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      id: 'defaultType',
+      name: 'checkbox',
+      label: 'checkbox'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<span class="checkbox">
+  <input
+    type="checkbox"
+    id="defaultType"
+    name="checkbox"
+    class="checkbox_input"
+  />
+  <label for="defaultType" class="checkbox_label">checkbox</label>
+</span>
+```
+
+### External Label
+
+- 라벨이 체크박스 옆에 붙어있지 않고, 별도 요소로 분리되어 연결해서 사용하는 경우
+- 외부 라벨을 사용할 경우, 클릭 시 이벤트가 반드시 체크박스 체크/해제가 되지 않을 수도 있어 컴포넌트를 사용하는 곳에서 별도 정의 필요 (예: 쇼핑몰 장바구니의 경우, 체크박스의 라벨인 상품명 클릭 시 상세 페이지로 이동함)
+- `<input>`의 `id` 값과 `<label>`의 `for` 값이 반드시 일치해야 하며, `<label>`은 시각적인 표현 역할만 하게 됨
+- 외부 라벨요소의 `id` 값과 `<input>`의 `aria-labelledby` 값이 반드시 일치해야 함
+
+<Canvas>
+  <Story
+    name="External Label"
+    args={{
+      hasLabel: false,
+      id: 'checkboxExternalType',
+      name: 'checkbox',
+      externalLabelId: 'checkboxExternalLabel'
+    }}
+  >
+    {TemplateExternalLabel.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<span class="checkbox">
+  <input
+    type="checkbox"
+    id="checkboxExternalType"
+    name="checkbox"
+    class="checkbox_input"
+    aria-labelledby="checkboxExternalLabel"
+  />
+  <label for="checkboxExternalType" class="checkbox_label"></label>
+</span>
+<span id="checkboxExternalLabel" class="checkbox_label">external label</span>
+```

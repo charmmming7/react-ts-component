@@ -1,0 +1,61 @@
+.dropdown {
+  $dropdown: &;
+
+  position: relative;
+  width: 100%;
+  background-color: $white;
+
+  &.is_open {
+    .btn {
+      border-color: $black;
+
+      .ico_arrow {
+        transform: translateY(-50%) rotate(-90deg);
+      }
+    }
+  }
+
+  &.is_disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  &_box {
+    @include transition(height .4s);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+    height: 0;
+    max-height: 144px;
+    background-color: $white;
+
+    &.is_open {
+      border: 1px solid $black;
+      border-top-width: 0;
+    }
+  }
+
+  .btn {
+    position: relative;
+    // 아래로 button 공통 스타일
+    width: 100%;
+    padding: 8px 14px;
+    border: 1px solid $veyLightgray;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+
+    .ico_arrow {
+      @include transition(transform .4s);
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%) rotate(90deg);
+    }
+  }
+}

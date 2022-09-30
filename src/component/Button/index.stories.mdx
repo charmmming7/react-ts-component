@@ -1,0 +1,181 @@
+import { Meta, Story, Canvas, ArgsTable, PRIMARY_STORY} from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import Button from './index';
+
+export const Template = (args) => <Button {...args} />;
+
+export const ButtonArgTypes = {
+  label: {
+    table: {
+      category: 'Text',
+    },
+    defaultValue: 'button',
+    control: {
+      type: 'text'
+    }
+  },
+  type: {
+    table: {
+      category: 'style',
+      type: {
+        summary: 'string',
+        detail: 'default:일반 버튼 \nprimary:실행, 확인 등의 동작 수행 시 사용하는 강조 버튼'
+      }
+    },
+    control: {
+      type: 'select',
+      options: ['default', 'primary']
+    }
+  },
+  iconType: {
+    control: {
+      type: 'select',
+      options: ['none', 'search', 'delete']
+    },
+    table: {
+      category: 'style',
+      summary: 'string',
+      detail: 'search, delete'
+    }
+  },
+  isBlock: {
+    control: {
+      type: 'boolean',
+    },
+    table: {
+      category: 'style',
+    }
+  },
+  isDisabled: {
+    control: {
+      type: 'boolean'
+    },
+    table: {
+      category: 'style',
+    },
+  },
+  onClick: {
+    defaultValue: null,
+    table: {
+      category: 'Events',
+      type: {
+        summary: 'function',
+        detail: '(e: MouseEvent<HTMLButtonElement>) => void;'
+      }
+    },
+    control: { disable: true },
+    action: 'onClick'
+  }
+};
+
+
+<Meta
+  title="Component/Button"
+  component={Button}
+  argTypes={{...ButtonArgTypes}}
+/>
+
+# Button
+
+## Props
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Variations
+
+### Default
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      type: 'default'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<button type="button" class="btn">Button</button>
+```
+
+
+### Block
+
+영역을 100% 차지하는 버튼으로 `is_block` 클래스가 추가됩니다.
+
+<Canvas>
+  <Story
+    name="Block"
+    args={{
+      isBlock: true
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<button type="button" class="btn is_block">button</button>
+```
+
+### Primary
+
+실행, 확인 등의 동작 수행 시 사용하는 강조 버튼으로, `is_primary` 클래스가 추가됩니다.
+
+<Canvas>
+  <Story
+    name="Primary"
+    args={{
+      type: 'primary'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<button type="button" class="btn is_primary">Button</button>
+```
+
+### Disable
+
+비활성 상태일 때는 `disabled` 속성이 추가됩니다.
+
+<Canvas>
+  <Story
+    name="Disable"
+    args={{
+      isDisabled: true
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<button type="button" class="btn" disabled>Button</button>
+```
+
+### Icon
+
+텍스트 왼쪽에 SVG 아이콘이 추가되는 버튼입니다. 
+
+<Canvas>
+  <Story
+    name="Icon"
+    args={{
+      iconType: 'search'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```html
+<button type="button" class="btn">
+  <svg>...</svg>
+  Button
+</button>
+```

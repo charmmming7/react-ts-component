@@ -1,0 +1,48 @@
+.side_nav {
+  $sideNav: &;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: calc(#{$header-menu-z-index} + 1);
+  overflow-y: auto;
+  width: 266px;
+  background: $white;
+  text-align: left;
+  transition: transform .4s ease-in-out;
+  transform: translate(-100%, 0);
+
+  &.is_open {
+    transform: translate(0, 0);
+  }
+
+  &.is_right {
+    right: 0;
+    left: unset;
+    transform: translate(100%, 0);
+
+    &.is_open {
+      transform: translate(0, 0);
+    }
+  }
+
+  #{$sideNav}_header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 56px;
+    padding: 10px 18px 0;
+  }
+
+  .btn_close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    padding: 10px;
+  }
+
+  #{$sideNav}_list {
+    padding-top: 80px;
+  }
+}

@@ -1,0 +1,6 @@
+.accordion_panel {
+  overflow: hidden;
+  margin-top: -1px;
+  border-bottom: 1px solid $silver;
+  transition: height .4s;
+}

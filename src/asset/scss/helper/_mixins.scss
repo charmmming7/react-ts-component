@@ -1,0 +1,123 @@
+@mixin blind {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px !important;
+  padding: 0 !important;
+}
+
+@mixin clearfix {
+  &::before,
+  &::after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+@mixin placeholder() {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin fonts($size: $initial-font-size, $lineHeight: false, $bold: false) {
+  @if unitless($size) {
+    $size: 1px * $size;
+  }
+  font-size: $size;
+
+  @if $lineHeight {
+    @if $lineHeight == 'normal' {
+      line-height: normal;
+    } @else {
+      line-height: 1px * $lineHeight;
+    }
+  }
+
+  @if $bold {
+    font-weight: $bold;
+  }
+}
+
+@mixin ellipsis($lines: 1,
+$display: block,
+$width: null,
+$max-width: null,
+$overflow: hidden) {
+  @if $lines <= 1 {
+    display: $display;
+    overflow: $overflow;
+    width: $width;
+    max-width: $max-width;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: break-all;
+  } @else {
+    display: $display; // fallback
+    display: box;
+    overflow: $overflow;
+    width: $width;
+    max-width: $max-width;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+    -webkit-line-clamp: $lines;
+  }
+}
+
+@mixin transition($properties...) {
+  @if length($properties) >= 1 {
+    transition: $properties;
+  } @else {
+    transition: all ease-in-out .6s 0s;
+  }
+}
+
+@mixin absolute-full {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin position-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin hide-webkit-scroll {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin notch-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@mixin css3-prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -khtml-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
+  @include css3-prefix('transform', rotate($deg + deg));
+  filter: progid:dximagetransform.microsoft.matrix(M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod='auto expand');
+  zoom: 1;
+}
