@@ -1,5 +1,7 @@
 # React + TypeScript Component via Storybook
 
+크로마틱 확인 경로: https://www.chromatic.com/library?appId=6336ce94bec70fd3fe9f8b2e
+
 ## Getting Started
 
 ### 패키지 설치
