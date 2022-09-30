@@ -3,7 +3,7 @@ const paths = require('../config/paths');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const sassRegex = /\.(scss|sass)$/;
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   stories: ['../src/**/**/*.stories.@(md)x'],
@@ -55,7 +55,7 @@ module.exports = {
       }
     });
 
-    if(configType === 'DEVELOPMENT') {
+    // if(configType === 'DEVELOPMENT') {
 
       config.module.rules.push({
         test: sassRegex,
@@ -79,48 +79,48 @@ module.exports = {
         ]
       });
       
-    }
+    // }
 
-    else {
-      config.module.rules.push({
-        test: sassRegex,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          {
-            loader: 'css-loader',      
-          },
-          'sass-loader',
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              resources: `${paths.appSrc}/asset/scss/helper/**/*.scss`,
-              sourceMap: false,
-              minimize: false,
-              outputStyle: 'expanded'
-            }
-          }
-        ]
-      });
-    }
+    // else {
+    //   config.module.rules.push({
+    //     test: sassRegex,
+    //     use: [
+    //       // {
+    //       //   loader: MiniCssExtractPlugin.loader,
+    //       // },
+    //       {
+    //         loader: 'css-loader',      
+    //       },
+    //       'sass-loader',
+    //       {
+    //         loader: 'sass-resources-loader',
+    //         options: {
+    //           resources: `${paths.appSrc}/asset/scss/helper/**/*.scss`,
+    //           sourceMap: false,
+    //           minimize: false,
+    //           outputStyle: 'expanded'
+    //         }
+    //       }
+    //     ]
+    //   });
+    // }
     return { 
       ...config,
       devtool: false,
-      plugins: [
-        new MiniCssExtractPlugin({
-            filename: "[name].css",
-        }),
-        new webpack.SourceMapDevToolPlugin({
-          exclude: ['main.css'],
-        }),
-        new CopyWebpackPlugin({
-          patterns: [
-            { from: 'src/asset/js', to: 'asset/js' }
-          ]
-        }),
-        ...config.plugins
-      ]
+      // plugins: [
+      //   new MiniCssExtractPlugin({
+      //       filename: "[name].css",
+      //   }),
+      //   new webpack.SourceMapDevToolPlugin({
+      //     exclude: ['main.css'],
+      //   }),
+      //   // new CopyWebpackPlugin({
+      //   //   patterns: [
+      //   //     { from: 'src/asset/js', to: 'asset/js' }
+      //   //   ]
+      //   // }),
+      //   ...config.plugins
+      // ]
     }
   },
 };

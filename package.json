@@ -46,7 +46,7 @@
     "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.3",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
     "postcss": "^8.3.11",
@@ -83,7 +83,8 @@
     "build-storybook": "build-storybook -c .storybook -o dist",
     "prepare": "husky install",
     "lint:script": "eslint src/**/**.{ts,tsx}",
-    "lint:style": "stylelint src/**/**.{scss,css}"
+    "lint:style": "stylelint src/**/**.{scss,css}",
+    "chromatic": "npx chromatic --project-token=605cf939f018"
   },
   "eslintConfig": {
     "extends": [
@@ -188,5 +189,7 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "corp-admin-markup@0.1.0"
 }
