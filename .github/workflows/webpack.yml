@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: storybook build
 
 on:
   push:
@@ -22,23 +22,34 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Cache node_modules
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      run: npm ci
+      if: steps.cache.outputs.cache-hit != 'true'
+
+    - name: Set PUBLIC_URL
+      run: |
+        PUBLIC_URL=$(echo $GITHUB_REPOSITORY | sed -r 's/^.+\/(.+)$/\/\1\//')
+        echo PUBLIC_URL=$PUBLIC_URL > .env
+
     - name: Build
       run: |
-        npm install
-        npx webpack
-
-    - run: npm ci
-    - run: npm run build
-    
-    - uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        npm run build
+        cp ./build/index.html ./build/404.html
 
     - name: Build storybook
       run: |
         npm run build-storybook
         mv ./storybook-static ./build/storybook
+
 
     - name: Deploy to gh-pages branch
       uses: peaceiris/actions-gh-pages@v3
