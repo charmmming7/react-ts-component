@@ -26,3 +26,8 @@ jobs:
       run: |
         npm install
         npx webpack
+
+    - name: Build storybook
+      run: |
+        npm run build-storybook
+        mv ./storybook-static ./build/storybook
