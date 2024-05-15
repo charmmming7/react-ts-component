@@ -1,8 +1,7 @@
 # React + TypeScript Component via Storybook
 Storybook을 통해 화면을 확인 할 수 있는 React + TypeScript로 제작된 UI 컴포넌트
 
-
-크로마틱 확인 경로: https://www.chromatic.com/library?appId=6336ce94bec70fd3fe9f8b2e
+preview 경로: https://charmmming7.github.io/react-ts-component/storybook
 
 ## Getting Started
 
